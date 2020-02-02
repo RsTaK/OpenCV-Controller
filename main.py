@@ -2,12 +2,11 @@ import cv2
 import numpy as np
 import color
 import centroid
+from directkeys import PressKey, W, A, S, D
 
 cap = cv2.VideoCapture(2)
 fps = cap.get(cv2.CAP_PROP_FPS)
 print ("Frames per second using video.get(cv2.cv.CV_CAP_PROP_FPS): {0}".format(fps))
-
-
 
 while True:
 
@@ -26,19 +25,20 @@ while True:
     print('Centroid for Green : {}'.format(greenCentroid))
 
     if greenCentroid[1] < int(frame.shape[0]/2):
-      print('Up')
+      #print('Up')
+      PressKey(W)
+
     else:
-      print('Down')
+      #print('Down')
+      PressKey(S)
 
   if redCentroid is not None:
     print('Centroid for Red : {}'.format(redCentroid))
 
     if redCentroid[0] < int(frame.shape[0]/2):
-      print('Left')
+      PressKey(A)
     else:
-      print('Right')
-  
-
+      PressKey(D)
 
   cv2.line(frame, (int(frame.shape[0]/2), 0), (int(frame.shape[0]/2) ,frame.shape[1]), (0, 0, 255), 3)
   cv2.line(frame, (0, int(frame.shape[0]/2)), (frame.shape[1], int(frame.shape[0]/2)), (255, 0, 0), 3)
